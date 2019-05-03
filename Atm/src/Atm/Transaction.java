@@ -2,9 +2,9 @@ package Atm;
 
 public class Transaction {
 
-	public static void transferMoney(Account sourceAccount, Account destinationAccount, double amount) throws Exception {
-		if (isBalanceNegative(sourceAccount, amount)) {
-			throw new Exception("Not enough funds");
+	public static void transferMoney(Account sourceAccount, Account destinationAccount, double amount) {
+		if (hasEnoughFunds(sourceAccount, amount)) {
+			System.out.println("Not enough funds");
 		}
 		else {
 			sourceAccount.setBalance(sourceAccount.getBalance() - amount);
@@ -13,7 +13,7 @@ public class Transaction {
 		}
 	}
 	
-	private static boolean isBalanceNegative(Account sourceAccount, double amount) {
+	private static boolean hasEnoughFunds(Account sourceAccount, double amount) {
 		if ((sourceAccount.getBalance() - amount) < 0)
 			return true;
 		return false;

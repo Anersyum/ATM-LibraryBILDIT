@@ -82,12 +82,8 @@ public class ATM {
 					} else {
 						System.out.println("One of the entered account numbers doesn't exists!");
 					}
-				} catch (Exception e) {
-					if (e.toString().equals("java.lang.Exception: Not enough funds")) {
-						System.out.println("There is not enough funds on that account!");
-						continue;
-					} else
-						System.out.println("You must enter numbers for each field.");
+				} catch (InputMismatchException e) {
+					System.out.println("You must enter numbers for each field.");
 				}
 				input.nextLine();
 			}
@@ -107,7 +103,7 @@ public class ATM {
 					accountNumber = input.nextLong();
 					if (accountNumber == -1)
 						return;
-				} catch (Exception e) {
+				} catch (InputMismatchException e) {
 					System.out.println("You must enter an account number.");
 				}
 				input.nextLine();

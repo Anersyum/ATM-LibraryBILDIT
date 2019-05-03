@@ -1,4 +1,5 @@
 package Atm;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Test {
@@ -14,7 +15,7 @@ public class Test {
 			try {
 				System.out.print("Option: ");
 				choice = input.nextInt();
-			} catch (Exception e) {
+			} catch (InputMismatchException e) {
 				System.out.println("You must enter a number!");
 				input.nextLine();
 				continue;
