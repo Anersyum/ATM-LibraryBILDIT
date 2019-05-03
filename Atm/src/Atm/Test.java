@@ -10,17 +10,35 @@ public class Test {
 		
 		while (choice != 0) {
 			ATM.showMenu();
-			choice = input.nextInt();
 			
-			if (choice == 1) {
+			try {
+				System.out.print("Option: ");
+				choice = input.nextInt();
+			} catch (Exception e) {
+				System.out.println("You must enter a number!");
 				input.nextLine();
-				ATM.accountCreationMenu(input);
-			} else if (choice == 2) {
-				ATM.transactionMenu(input);
-			} else if (choice == 3) {
-				ATM.accountInfoMenu(input);
+				continue;
+			}
+			
+			switch (choice) {
+				case 0:
+					break;
+				case 1:
+					input.nextLine();
+					ATM.accountCreationMenu(input);
+					break;
+				case 2:
+					ATM.transactionMenu(input);
+					break;
+				case 3:
+					ATM.accountInfoMenu(input);
+					break;
+				default:
+					System.out.println("Enter a valid option.");
+					break;
 			}
 			input.nextLine();
+			System.out.println();
 		}
 		input.close();
 		System.out.println("Thank you for using Deez Atm!");
