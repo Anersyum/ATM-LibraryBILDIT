@@ -1,5 +1,4 @@
 package Atm;
-
 import java.util.Scanner;
 
 public class Test {
@@ -21,6 +20,7 @@ public class Test {
 			} else if (choice == 3) {
 				ATM.accountInfoMenu(input);
 			}
+			input.nextLine();
 		}
 		input.close();
 		System.out.println("Thank you for using Deez Atm!");

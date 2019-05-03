@@ -2,10 +2,9 @@ package Atm;
 
 public class Transaction {
 
-	public static void transferMoney(Account sourceAccount, Account destinationAccount, double amount) {
+	public static void transferMoney(Account sourceAccount, Account destinationAccount, double amount) throws Exception {
 		if (isBalanceNegative(sourceAccount, amount)) {
-			System.out.println("The transfer is not possible, the balance will be below zero for account " 
-					+ sourceAccount.getAccountNumber());
+			throw new Exception("Not enough funds");
 		}
 		else {
 			sourceAccount.setBalance(sourceAccount.getBalance() - amount);
@@ -18,5 +17,13 @@ public class Transaction {
 		if ((sourceAccount.getBalance() - amount) < 0)
 			return true;
 		return false;
+	}
+	
+	public static boolean checkIfAccountsExist(Account sourceAccount, Account destinationAccount) {
+		if (sourceAccount == null || destinationAccount == null) {
+			System.out.println("One of the entered account numbers doesn't exists!");
+			return false;
+		}
+		return true;
 	}
 }

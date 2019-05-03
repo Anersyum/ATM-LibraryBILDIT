@@ -26,11 +26,4 @@ public class AccountManager{
 				+ account.getAccountNumber() + " has been created!");
 	}
 	
-	public static void transferMoney(long sourceAccountNumber, long destinationAccountNumber,
-			double amount) {
-		
-		Transaction.transferMoney(AccountManager.getAccountByAccountNumber(sourceAccountNumber),
-				AccountManager.getAccountByAccountNumber(destinationAccountNumber), amount);
-		System.out.println();
-	}
 }
