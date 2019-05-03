@@ -42,6 +42,5 @@ public class Test {
 		}
 		input.close();
 		System.out.println("Thank you for using Deez Atm!");
-
 	}
 }

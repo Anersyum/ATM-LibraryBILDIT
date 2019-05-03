@@ -21,7 +21,6 @@ public class Transaction {
 	
 	public static boolean checkIfAccountsExist(Account sourceAccount, Account destinationAccount) {
 		if (sourceAccount == null || destinationAccount == null) {
-			System.out.println("One of the entered account numbers doesn't exists!");
 			return false;
 		}
 		return true;

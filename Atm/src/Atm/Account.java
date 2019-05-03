@@ -21,19 +21,13 @@ public class Account {
 		return accountName;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
-	}
-
 	public double getBalance() {
 		return balance;
 	}
 
 	public void setBalance(double balance) {
-		if (balance < 0)
-			this.balance = 0;
-		else
-			this.balance = balance;
+		if (balance > 0)
+			this.balance = balance;			
 	}
 	
 	public long getAccountNumber() {

@@ -22,6 +22,7 @@ public class AccountManager{
 	
 	public static void createAccount(String accountName, double balance) {
 		Account account = new Account(accountName, balance);
+		
 		System.out.println("The account with the account number " 
 				+ account.getAccountNumber() + " has been created!");
 	}

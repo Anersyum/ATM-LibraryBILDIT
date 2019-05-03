@@ -18,6 +18,7 @@ public class ATM {
 		String accountName;
 		
 		System.out.println("Enter -1 at any time to cancel.");
+		
 		System.out.print("Enter account name: ");
 		accountName = input.nextLine();
 		if (accountName.equals("-1"))
@@ -48,8 +49,7 @@ public class ATM {
 		
 		if (AccountManager.numberOfAccounts() < 2) {
 			System.out.println("There are no active accounts or there is only one account!");
-		}
-		else {
+		} else {
 			while (true) {
 				try {
 					System.out.println("Enter -1 at any time to cancel.");
@@ -76,20 +76,23 @@ public class ATM {
 							System.out.print("The amount can't be negative: ");
 							amount = input.nextDouble();
 						}
-							Transaction.transferMoney(sourceAccount, destinationAccount, amount);
-							break;
+						
+						Transaction.transferMoney(sourceAccount, destinationAccount, amount);
+						break;
+					} else {
+						System.out.println("One of the entered account numbers doesn't exists!");
 					}
-			} catch (Exception e) {
-				if (e.toString().equals("java.lang.Exception: Not enough funds")) {
-					System.out.println("There is not enough funds on that account!");
-					continue;
-				} else
-					System.out.println("You must enter numbers for each field.");
+				} catch (Exception e) {
+					if (e.toString().equals("java.lang.Exception: Not enough funds")) {
+						System.out.println("There is not enough funds on that account!");
+						continue;
+					} else
+						System.out.println("You must enter numbers for each field.");
+				}
+				input.nextLine();
 			}
-			input.nextLine();
 		}
 	}
-}
 	
 	public static void accountInfoMenu(Scanner input) {
 		long accountNumber = -1;
