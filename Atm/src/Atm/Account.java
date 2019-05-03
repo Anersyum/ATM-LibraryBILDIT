@@ -16,6 +16,13 @@ public class Account {
 		this.createUniqueAccountNumber();
 		accounts.add(this);
 	}
+	
+	public Account(long accountNumber, String accountName, double balance) {
+		this.accountNumber = accountNumber;
+		this.accountName = accountName;
+		this.balance = balance;
+		accounts.add(this);
+	}
 
 	public String getAccountName() {
 		return accountName;

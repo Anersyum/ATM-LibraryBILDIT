@@ -1,4 +1,7 @@
 package Atm;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,8 +10,10 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
+		File file = new File("accounts.txt");
 		int choice = -1;
 		
+		readFile(file);
 		while (choice != 0) {
 			ATM.showMenu();
 			
@@ -42,6 +47,39 @@ public class Test {
 			System.out.println();
 		}
 		input.close();
+		writeToFile(file);
 		System.out.println("Thank you for using Deez Atm!");
 	}
+	
+	private static void writeToFile(File file) {
+		try (PrintWriter output = new PrintWriter(file)) {
+			for (Account acc : Account.getAccounts()) {
+				output.print(acc.getAccountNumber() + " ");
+				output.print(acc.getAccountName() + " ");
+				output.println(acc.getBalance());
+			}
+		} catch (IOException e) {
+				System.out.println("File exists!");
+		}
+	}
+	
+	private static void readFile(File file) {
+		if (file.exists()) {
+			long accountNumber;
+			String accountName;
+			double balance;
+			
+			try (Scanner readFromFile = new Scanner(file)) {
+				while (readFromFile.hasNext()) {
+					accountNumber = readFromFile.nextLong();
+					accountName = readFromFile.next();
+					balance = readFromFile.nextDouble();
+					new Account(accountNumber, accountName, balance);
+				}
+			} catch (IOException e) {
+				System.out.println("File doesn't exist!");
+			}
+		}
+	}
 }
+
