@@ -15,13 +15,19 @@ public class ATM {
 	
 	public static void accountCreationMenu(Scanner input) {
 		double balance = -1;
-		String accountName;
+		String firstName;
+		String lastName;
 		
 		System.out.println("Enter -1 at any time to cancel.");
 		
-		System.out.print("Enter account name: ");
-		accountName = input.nextLine();
-		if (accountName.equals("-1"))
+		System.out.print("Please enter your first name: ");
+		firstName = input.next();
+		if (firstName.equals("-1"))
+			return;
+		
+		System.out.print("Please enter your last name: ");
+		lastName = input.next();
+		if (lastName.equals("-1"))
 			return;
 		
 		System.out.print("Enter your balance: ");
@@ -40,7 +46,7 @@ public class ATM {
 			input.nextLine();
 		} while (balance < 0);
 		
-		AccountManager.createAccount(accountName, balance);
+		AccountManager.createAccount(firstName, lastName, balance);
 	}
 	
 	public static void transactionMenu(Scanner input) {

@@ -5,27 +5,30 @@ import java.util.ArrayList;
 public class Account {
 
 	private long accountNumber;
-	private String accountName;
+	private String firstName;
+	private String lastName;
 	private double balance;
 	private ArrayList<Long> accountNumbersList = new ArrayList<Long>();
 	private static ArrayList<Account> accounts = new ArrayList<Account>();
 	
-	public Account(String accountName, double balance) {
-		this.accountName = accountName;
+	public Account(String firstName, String lastName, double balance) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.setBalance(balance);
 		this.createUniqueAccountNumber();
 		accounts.add(this);
 	}
 	
-	public Account(long accountNumber, String accountName, double balance) {
+	public Account(long accountNumber, String firstName, String lastName, double balance) {
 		this.accountNumber = accountNumber;
-		this.accountName = accountName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.balance = balance;
 		accounts.add(this);
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 
 	public double getBalance() {

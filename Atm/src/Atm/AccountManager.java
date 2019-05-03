@@ -4,7 +4,7 @@ public class AccountManager{
 	
 	public static void showAccountInfo(Account account) {
 		System.out.println("Account number: " + account.getAccountNumber()
-				+ "\nAccount name: " + account.getAccountName()
+				+ "\nAccount name: " + account.getFullName()
 				+ "\nBalance: " + account.getBalance() + "$");
 	}
 	
@@ -20,8 +20,8 @@ public class AccountManager{
 		return Account.getAccounts().size();
 	}
 	
-	public static void createAccount(String accountName, double balance) {
-		Account account = new Account(accountName, balance);
+	public static void createAccount(String firstName, String lastName, double balance) {
+		Account account = new Account(firstName, lastName, balance);
 		
 		System.out.println("The account with the account number " 
 				+ account.getAccountNumber() + " has been created!");

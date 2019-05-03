@@ -55,7 +55,7 @@ public class Test {
 		try (PrintWriter output = new PrintWriter(file)) {
 			for (Account acc : Account.getAccounts()) {
 				output.print(acc.getAccountNumber() + " ");
-				output.print(acc.getAccountName() + " ");
+				output.print(acc.getFullName() + " ");
 				output.println(acc.getBalance());
 			}
 		} catch (IOException e) {
@@ -66,15 +66,17 @@ public class Test {
 	private static void readFile(File file) {
 		if (file.exists()) {
 			long accountNumber;
-			String accountName;
+			String firstName;
+			String lastName;
 			double balance;
 			
 			try (Scanner readFromFile = new Scanner(file)) {
 				while (readFromFile.hasNext()) {
 					accountNumber = readFromFile.nextLong();
-					accountName = readFromFile.next();
+					firstName = readFromFile.next();
+					lastName = readFromFile.next();
 					balance = readFromFile.nextDouble();
-					new Account(accountNumber, accountName, balance);
+					new Account(accountNumber, firstName, lastName, balance);
 				}
 			} catch (IOException e) {
 				System.out.println("File doesn't exist!");
