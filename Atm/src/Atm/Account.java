@@ -8,10 +8,10 @@ public class Account {
 	private String accountName;
 	private double balance;
 	private ArrayList<Long> accountNumbersList = new ArrayList<Long>();
-	public static ArrayList<Account> accounts = new ArrayList<Account>();
+	private static ArrayList<Account> accounts = new ArrayList<Account>();
 	
 	public Account(String accountName, double balance) {
-		this.setAccountName(accountName);
+		this.accountName = accountName;
 		this.setBalance(balance);
 		this.createUniqueAccountNumber();
 		accounts.add(this);
@@ -38,6 +38,10 @@ public class Account {
 	
 	public long getAccountNumber() {
 		return this.accountNumber;
+	}
+	
+	public static ArrayList<Account> getAccounts() {
+		return accounts;
 	}
 	
 	private void createUniqueAccountNumber() {
