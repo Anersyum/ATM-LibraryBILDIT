@@ -13,18 +13,29 @@ public class Test {
 			showChoices();
 			choice = input.nextInt();
 			
-			if (choice == 1) {
-				input.nextLine();
-				createNewAccount(input);
-			} else if (choice == 2) {
-				input.nextLine();
-				createNewBook(input);
-			} else if (choice == 3) {	
-				borrowBook(input);
-
-			}
-			else if (choice == 4) {
-				showAccountInfo(input);
+			switch (choice) {
+				case 0:
+					break;
+				case 1:
+					input.nextLine();
+					createNewAccount(input);
+					break;
+				case 2:
+					input.nextLine();
+					createNewBook(input);
+					break;
+				case 3:
+					borrowBook(input);
+					break;
+				case 4:
+					returnBook(input);
+					break;
+				case 5:
+					showAccountInfo(input);
+					break;
+				default:
+					System.out.println("Enter a valid choice!");
+					break;
 			}
 		}
 		input.close();
@@ -37,19 +48,20 @@ public class Test {
 				+ "\n1. Create account"
 				+ "\n2. Create book"
 				+ "\n3. Borrow book for a fixed period of time"
-				+ "\n4. Show account info"
+				+ "\n4. Return book"
+				+ "\n5. Show account info"
 				+ "\n0. Exit");
 	}
 	
 	public static void createNewAccount(Scanner input) {
-		String accountName;
+		String firstName, lastName;
 		
-		System.out.print("Please, enter your name: ");
-		accountName = input.nextLine();
+		System.out.print("Please, enter your first name: ");
+		firstName = input.next();
+		System.out.print("Please enter your last name: ");
+		lastName = input.next();
 		
-		Account account = new Account(accountName);
-		System.out.println("The account with the name of " + accountName + " has been created"
-				+ " with the id of " + account.getAccountId());
+		AccountManager.createAccount(firstName, lastName);
 	}
 	
 	public static void createNewBook(Scanner input) {
@@ -58,28 +70,30 @@ public class Test {
 		System.out.print("Please enter the name of the book: ");
 		bookName = input.nextLine();
 		
-		Book book = new Book(bookName);
-		System.out.println("The book with the name of " + bookName + " has been created with "
-				+ "the id of " + book.getBookId());
+		BookManager.addBookToLibrary(bookName);
 	}
 	
 	public static void borrowBook(Scanner input) {
 		int bookId, accountId;
+		Book book;
+		Account account;
 		
 		if (BookManager.getNumberOfBooks() == 0 || AccountManager.getNumberOfAccounts() == 0)
 			System.out.println("There are no accounts or books in the database!");
 		else {
 			System.out.print("Enter the id of the book you want to borrow: ");
 			bookId = input.nextInt();
-			if (BookManager.getNumberOfBooks() < bookId || bookId < 1)
+			book = BookManager.getBookById(bookId);
+			if (book == null)
 				System.out.println("That book doesn't exist!");
 			else {
 				System.out.print("Enter the id of the account that wants to borrow the book: ");
 				accountId = input.nextInt();
-				if (AccountManager.getNumberOfAccounts() < accountId || accountId < 1)
+				account = AccountManager.getAccountById(accountId);
+				if (account == null)
 					System.out.println("That account doesn't exist!");
 				else {
-					BookManager.borrow(accountId, bookId);
+					BookManager.borrow(account, book);
 				}
 			}
 		}
@@ -87,10 +101,34 @@ public class Test {
 	
 	public static void showAccountInfo(Scanner input) {
 		int accountId;
+		Account account;
 		
 		System.out.print("Enter the account id: ");
 		accountId = input.nextInt();
+		account = AccountManager.getAccountById(accountId);
 		
-		AccountManager.showAccountInfo(accountId);
+		if (account == null)
+			System.out.println("That account doesn't exist!");
+		else
+			AccountManager.showAccountInfo(account);
+	}
+	
+	public static void returnBook(Scanner input) {
+		int accountId, bookId;
+		Account account;
+		Book bookToRemove;
+		
+		System.out.print("Enter the account id: ");
+		accountId = input.nextInt();
+		System.out.print("Enter the id of the book: ");
+		bookId = input.nextInt();
+		
+		account = AccountManager.getAccountById(accountId);
+		bookToRemove = BookManager.getBookById(bookId);
+		
+		if (account == null || bookToRemove == null)
+			System.out.println("The book or the account doesn't exist!");
+		else
+			BookManager.returnBook(account, bookToRemove);
 	}
 }

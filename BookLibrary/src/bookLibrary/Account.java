@@ -5,33 +5,28 @@ import java.util.ArrayList;
 public class Account {
 
 	private static int accountId;
-	private  String accountName;
+	private  String firstName, lastName;
 	private int id;
-	private int numberOfBorrowedBooks;
-	public static ArrayList<Account> accounts = new ArrayList<Account>();
 	private ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 	
-	Account(String accountName) {
-		this.setAccountName(accountName);
+	Account(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 		accountId++;
 		this.id = accountId;
-		accounts.add(this);
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+	public void setFullName(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public int getNumberOfBorrowedBooks() {
-		return numberOfBorrowedBooks;
-	}
-
-	public void setNumberOfBorrowedBooks(int numberOfBorrowedBooks) {
-		this.numberOfBorrowedBooks = numberOfBorrowedBooks;
+		return borrowedBooks.size();
 	}
 
 	public int getAccountId() {
@@ -39,11 +34,15 @@ public class Account {
 	}
 	
 	public void addBorrowedBookToAccount(Book book) {
-		borrowedBooks.add(book);
+		if (borrowedBooks.size() >= 3)
+			System.out.println("You have borrowed more than three books. Please return at least one book "
+					+ "to borrow another");
+		else
+			borrowedBooks.add(book);
 	}
 	
 	public ArrayList<Book> getBorrowedBooks() {
-		if (this.numberOfBorrowedBooks != 0)
+		if (this.borrowedBooks.size() != 0)
 			return borrowedBooks;
 		return null;
 	}
