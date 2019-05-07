@@ -53,7 +53,7 @@ public class Test {
 	
 	private static void writeToFile(File file) {
 		try (PrintWriter output = new PrintWriter(file)) {
-			for (Account acc : Account.getAccounts()) {
+			for (Account acc : AccountManager.getAccounts()) {
 				output.print(acc.getAccountNumber() + " ");
 				output.print(acc.getFullName() + " ");
 				output.println(acc.getBalance());
@@ -76,7 +76,7 @@ public class Test {
 					firstName = readFromFile.next();
 					lastName = readFromFile.next();
 					balance = readFromFile.nextDouble();
-					new Account(accountNumber, firstName, lastName, balance);
+					AccountManager.createAccount(accountNumber, firstName, lastName, balance);
 				}
 			} catch (IOException e) {
 				System.out.println("File doesn't exist!");

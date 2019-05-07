@@ -9,14 +9,13 @@ public class Account {
 	private String lastName;
 	private double balance;
 	private ArrayList<Long> accountNumbersList = new ArrayList<Long>();
-	private static ArrayList<Account> accounts = new ArrayList<Account>();
+	
 	
 	public Account(String firstName, String lastName, double balance) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.setBalance(balance);
 		this.createUniqueAccountNumber();
-		accounts.add(this);
 	}
 	
 	public Account(long accountNumber, String firstName, String lastName, double balance) {
@@ -24,7 +23,6 @@ public class Account {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.balance = balance;
-		accounts.add(this);
 	}
 
 	public String getFullName() {
@@ -42,10 +40,6 @@ public class Account {
 	
 	public long getAccountNumber() {
 		return this.accountNumber;
-	}
-	
-	public static ArrayList<Account> getAccounts() {
-		return accounts;
 	}
 	
 	private void createUniqueAccountNumber() {
